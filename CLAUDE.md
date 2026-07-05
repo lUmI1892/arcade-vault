@@ -8,16 +8,9 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 Arcade Vault is an online gaming platform for competing and earning points. It follows **Spec Driven Design** using `/spec` and `/spec-impl` directories.
 
-## Commands
+## Skills
 
-```bash
-npm run dev      # Start dev server (Turbopack, outputs to .next/dev)
-npm run build    # Production build (Turbopack by default)
-npm run start    # Start production server
-npm run lint     # Run ESLint directly (NOT next lint — removed in v16)
-```
-
-No test runner is configured yet.
+Usa siempre /frontend-design para diseñar la interfaz de usuario.
 
 ## Architecture
 
