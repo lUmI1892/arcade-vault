@@ -5,8 +5,9 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 
 const NAV_LINKS = [
-  { href: '/biblioteca', label: 'Biblioteca' },
+  { href: '/games', label: 'Juegos' },
   { href: '/salon', label: 'Salón de la Fama' },
+  { href: '/about', label: 'About' },
 ]
 
 export default function Nav() {
@@ -19,7 +20,7 @@ export default function Nav() {
   return (
     <>
       <nav className="av-nav">
-        <Link href="/biblioteca" className="logo">
+        <Link href="/" className="logo">
           <div className="logo-mark" />
           <div className="logo-text">
             <span className="neon-cyan">ARCADE </span>
