@@ -60,8 +60,8 @@ export default async function JugarPage({ params }: { params: Promise<{ id: stri
             <Link href={`/juego/${id}`}>
               <button className="btn magenta">REINTENTAR</button>
             </Link>
-            <Link href="/biblioteca">
-              <button className="btn ghost">BIBLIOTECA</button>
+            <Link href="/games">
+              <button className="btn ghost">JUEGOS</button>
             </Link>
           </div>
         </div>
