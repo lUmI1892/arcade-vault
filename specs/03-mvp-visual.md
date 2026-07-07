@@ -1,7 +1,7 @@
 ---
 id: 03
 title: MVP Visual — Arcade Vault
-state: Aprobado
+state: Implementado
 dependencies: []
 date: 2026-07-05
 objective: Implementar las 5 pantallas principales de Arcade Vault como UI estática en Next.js, sin lógica de juego ni persistencia.
