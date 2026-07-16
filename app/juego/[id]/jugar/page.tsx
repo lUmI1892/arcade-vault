@@ -1,11 +1,42 @@
-import Link from 'next/link'
-import { notFound } from 'next/navigation'
-import { GAMES } from '../../../data/games'
+import Link from "next/link";
+import { notFound } from "next/navigation";
+import { createClient } from "@/lib/supabase/server";
+import type { GameRow } from "@/lib/supabase/types";
+import AsteroidsPlay from "./_components/AsteroidsPlay";
 
-export default async function JugarPage({ params }: { params: Promise<{ id: string }> }) {
-  const { id } = await params
-  const game = GAMES.find((g) => g.id === id)
-  if (!game) notFound()
+export default async function JugarPage({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
+  const { id } = await params;
+  const supabase = await createClient();
+
+  const { data: game } = await supabase
+    .from("games")
+    .select("*")
+    .eq("id", id)
+    .single<GameRow>();
+
+  if (!game) notFound();
+
+  if (id === "asteroids") {
+    return (
+      <div className="flex flex-col items-center gap-4 py-6">
+        <div className="flex items-center gap-4">
+          <Link href={`/juego/${id}`}>
+            <button
+              className="btn ghost"
+              style={{ fontSize: "9px", padding: "8px 12px" }}
+            >
+              ✕ SALIR
+            </button>
+          </Link>
+        </div>
+        <AsteroidsPlay gameId={id} />
+      </div>
+    );
+  }
 
   return (
     <div className="av-player">
@@ -23,9 +54,19 @@ export default async function JugarPage({ params }: { params: Promise<{ id: stri
           <span className="v">01</span>
         </div>
         <div className="hud-actions">
-          <button className="btn ghost" style={{ fontSize: '9px', padding: '8px 12px' }}>⏸ PAUSA</button>
+          <button
+            className="btn ghost"
+            style={{ fontSize: "9px", padding: "8px 12px" }}
+          >
+            ⏸ PAUSA
+          </button>
           <Link href={`/juego/${id}`}>
-            <button className="btn ghost" style={{ fontSize: '9px', padding: '8px 12px' }}>✕ SALIR</button>
+            <button
+              className="btn ghost"
+              style={{ fontSize: "9px", padding: "8px 12px" }}
+            >
+              ✕ SALIR
+            </button>
           </Link>
         </div>
       </div>
@@ -46,26 +87,6 @@ export default async function JugarPage({ params }: { params: Promise<{ id: stri
           <span>60 FPS</span>
         </div>
       </div>
-
-      <div className="modal-bd">
-        <div className="modal">
-          <h2>GAME OVER</h2>
-          <div className="final-label">PUNTUACIÓN FINAL</div>
-          <div className="final">000000</div>
-          <div className="input-row">
-            <input type="text" placeholder="INGRESA TUS INICIALES" maxLength={3} readOnly />
-          </div>
-          <div className="actions">
-            <button className="btn pulse">GUARDAR SCORE</button>
-            <Link href={`/juego/${id}`}>
-              <button className="btn magenta">REINTENTAR</button>
-            </Link>
-            <Link href="/games">
-              <button className="btn ghost">JUEGOS</button>
-            </Link>
-          </div>
-        </div>
-      </div>
     </div>
-  )
+  );
 }
