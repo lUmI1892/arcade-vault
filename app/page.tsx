@@ -4,7 +4,6 @@ import { useEffect } from "react";
 import Link from "next/link";
 import FloatingSilhouettes from "@/app/components/FloatingSilhouettes";
 import FeatureIcon from "@/app/components/FeatureIcon";
-import { GAMES } from "@/app/data/games";
 import { RECENT_SCORES, TOP_PLAYERS } from "@/app/data/activity";
 
 function useReveal() {
@@ -120,17 +119,15 @@ export default function HomePage() {
           <div className="section-rule" />
         </div>
         <div className="mini-rail">
-          {GAMES.slice(0, 6).map((g) => (
-            <Link key={g.id} href={`/juego/${g.id}`} className="mini-card">
-              <div className="mini-cover">
-                <div className={`cover-bg ${g.coverClass}`} />
-              </div>
-              <div className="mini-meta">
-                <div className="mini-title">{g.title}</div>
-                <div className="mini-cat">{g.category}</div>
-              </div>
-            </Link>
-          ))}
+          <Link href="/juego/asteroids" className="mini-card">
+            <div className="mini-cover">
+              <div className="cover-bg cover-rocas" />
+            </div>
+            <div className="mini-meta">
+              <div className="mini-title">ASTEROIDS</div>
+              <div className="mini-cat">SHOOTER</div>
+            </div>
+          </Link>
         </div>
         <div style={{ textAlign: "center", marginTop: 24 }}>
           <Link href="/games">
